@@ -16,13 +16,13 @@ Regardless of the situation, _The Principles of Active Development_ boils this d
 
 1) The source code for a project should be in a well-defined and easily accessible area.  During a build, that source code should be utilized, but build artifacts should also be in a separate, well-defined, and easily accessible area.  A developer should be able to make changes to the source code, but the build should not.
 
-1) Build tools typically need configuration files to build your project.  A developer should be able to open these files, immediately understand what they are doing, and be able to make changes to them.
+2) Build tools typically need configuration files to build your project.  A developer should be able to open these files, immediately understand what they are doing, and be able to make changes to them.
 
-1) When building a project, a change in the source code or build configuration should only cause those changed areas, and any dependent areas, to be re-built.
+3) When building a project, a change in the source code or build configuration should only cause those changed areas, and any dependent areas, to be re-built.
 
-1) Every point of the build should be reproducible.  Re-running any area of a build should produce the same results given the same source code.  This also means a developer should be able to re-build any area.
+4) Every point of the build should be reproducible.  Re-running any area of a build should produce the same results given the same source code.  This also means a developer should be able to re-build any area.
 
-1) A build tool that also manages source code and dependencies should do so in a distinctly separate stage from the build stage, and place them in the common source location as defined in Principle #1. If you build something, but you don't already have the source, how do you know what you're building?
+5) A build tool that also manages source code and dependencies should do so in a distinctly separate stage from the build stage, and place them in the common source location as defined in Principle #1. If you build something, but you don't already have the source, how do you know what you're building?
 
 
 ## Shorthand of Active Development
@@ -30,16 +30,17 @@ Regardless of the situation, _The Principles of Active Development_ boils this d
 Each Principle can be redefined as these phrases:
 
 1) Single Source Tree, Single Build Tree
-1) Ease of Inspection
-1) Incrementally Safe
-1) Reproducible Builds
-1) Know the Source before the Build
+2) Ease of Inspection
+3) Incrementally Safe
+4) Reproducible Builds
+5) Know the Source before the Build
 
 ## Tests of Active Development
 
 Here are some simple tests you can run on your build tool to test for each of the principles:
 
 1) Single Source Tree, Single Build Tree:
+
     * If I'm working with multiple repositories, they should be in a common place, say a "sources" directory.  When I use my build tools to build these, the build artifacts should be in an entirely separate "factory" directory.  It doesn't have to use these names exactly, but the general idea.
     * Did running a build cause something to be downloaded?
     * Did running a build place artifacts in the same directory as your source?
@@ -47,7 +48,8 @@ Here are some simple tests you can run on your build tool to test for each of th
     * If you answered YES to any of these questions, then your build tool has failed this Principle.
 
 
-1) Ease of Inspection:
+2) Ease of Inspection:
+
     * If you need to change _how_ your build tool is building your source, you might need to edit your build tool's configuration files for that source.
     * Can you read this file without digging into documentation?
     * Can you easily figure out what individual commands are being generated and ran as a result of this configuration file?  (Ideally, these would be placed in some log file)
@@ -56,19 +58,22 @@ Here are some simple tests you can run on your build tool to test for each of th
     * If you answered NO to any of these questions, then your build tool has failed this Principle.
 
 
-1) Incrementally Safe:
+3) Incrementally Safe:
+
     * If you build your project once, then make a change to a single source file, what does your build tool need to do in order to build only that change?
     * Does your build tool need to re-build unrelated areas as a result of your change?
     * Does it FAIL to rebuild any other objects/areas that are dependent (use this object as a dependency)?  What about dependents of dependents?
     * Does it re-build areas that you have not requested? (e.g. If you only request your tool to build this object, it should only build this object. If you request your tool to build the whole project, then it should build this object and any dependents)
     * If you answered YES to any of these questions, then your build tool has failed this Principle.
 
-1) Reproducible Builds:
+4) Reproducible Builds:
+
     * If your build tool, given the same source code, environment, and configuration to build that source code, it should produce the exact same artifact.
     * If it does not, then your build tool has failed this Principle.
     * Smart build tools will extend their reproducible build support with Caching. They can do so on an object-level (a single compilation unit), or a component-level basis (an entire source tree) if you're using that type of tool and are using multiple repositories.  It can be extended even further if you're working with a team of developers and can _share_ that cache among themselves from a centralized artifact server so two different machines never have to compile the same code more than once.
 
-1) Know the Source before the Build:
+5) Know the Source before the Build:
+
     * If your tool does this properly, there should be two distinct commands a developer should run when doing a fresh build:  First, downloading the source.  Second, running the build.
     * When downloading the source, is it always downloaded to a single common location? (Principle #1)
     * Is your build tool only downloading the source you need for what you intend to build?
