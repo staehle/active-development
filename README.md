@@ -1,4 +1,4 @@
-# Forward
+## Forward
 
 **Active Development** is the concept of how easy it is to actively develop code when using your build tools.
 
@@ -10,7 +10,7 @@ There are many different scenarios in which we can think of _Active Development_
 
 Regardless of the situation, _The Principles of Active Development_ boils this down into some simple metrics that can be used to evaluate those tools in your workflow: How are they affecting your ability to iterate on code changes, the speed in which you can build and test those changes, and the reliability of your tools in doing so.  The Principles have been written from the viewpoint of a software developer who primarily uses build tools for embedded OS development, but they are intended to be generic enough for any development workflow scenario.
 
-# The Principles of Active Development
+## The Principles of Active Development
 
 1) The source code for a project should be in a well-defined and easily accessible area.  During a build, that source code should be utilized, but build artifacts should also be in a separate, well-defined, and easily accessible area.  A developer should be able to make changes to the source code, but the build should not.
 
@@ -23,7 +23,7 @@ Regardless of the situation, _The Principles of Active Development_ boils this d
 5) A build tool that also manages source code and dependencies should do so in a distinctly separate stage from the build stage, and place them in the common source location as defined in Principle #1. If you build something, but you don't already have the source, how do you know what you're building?
 
 
-# Shorthand of Active Development
+## Shorthand of Active Development
 
 Each Principle can be redefined as these phrases:
 
@@ -33,7 +33,7 @@ Each Principle can be redefined as these phrases:
 4) Reproducible Builds
 5) Know the Source before the Build
 
-# Tests of Active Development
+## Tests of Active Development
 
 Here are some simple tests you can run on your build tool to test for each of the principles:
 
